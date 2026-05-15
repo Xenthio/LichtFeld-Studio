@@ -15,7 +15,7 @@ on:
 
 jobs:
   build-ubuntu:
-    if: github.repository == 'MrNeRF/LichtFeld-Studio' || github.event.pull_request.base.repo.full_name == 'MrNeRF/LichtFeld-Studio'
+    if: github.repository == 'Xenthio/LichtFeld-Studio' || github.event.pull_request.base.repo.full_name == 'Xenthio/LichtFeld-Studio'
     runs-on: ubuntu-24.04
     container:
       image: nvidia/cuda:12.8.0-devel-ubuntu24.04
@@ -136,3 +136,14 @@ jobs:
 
       - name: Build
         run: cmake --build build -j $(nproc)
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: lichtfeld-studio-ubuntu-${{ matrix.build_type }}-${{ github.run_number }}
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            build/LichtFeld-Studio
+            build/*.so
+            build/*.AppImage
