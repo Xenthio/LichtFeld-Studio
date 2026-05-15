@@ -35,7 +35,7 @@ env:
 
 jobs:
   precheck:
-    if: github.repository == 'MrNeRF/LichtFeld-Studio'
+    if: github.repository == 'Xenthio/LichtFeld-Studio'
     runs-on: ubuntu-latest
     permissions:
       actions: read
